@@ -25,20 +25,18 @@ jobs:
       - checkout
 
       - restore_cache:
+          name: Restore Cache
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
       - run:
-          name: Downloading Dependencies
+          name: Download Dependencies
           command: ./gradlew androidDependencies
 
       - save_cache:
+          name: Save Cache
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-
-      - run:
-          name: Run Detekt
-          command: ./gradlew detekt
       
       - run:
           name: Run Ktlint
@@ -47,10 +45,11 @@ jobs:
       - run:
           name: Run Lint
           command: ./gradlew lintDebug
+          
+      - run:
+          name: Run Detekt
+          command: ./gradlew detekt
       
       - run:
           name: Run Unit Tests
           command: ./gradlew testDebugUnitTest
-
-
-# add ktlin and detekt
