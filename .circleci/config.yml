@@ -37,14 +37,20 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
       - run:
-          name: Running Tests
-          command: ./gradlew lint test
+          name: Run Detekt
+          command: ./gradlew detekt
+      
+      - run:
+          name: Run Ktlint
+          command: ./gradlew ktlint
+      
+      - run:
+          name: Run Lint
+          command: ./gradlew lintDebug
+      
+      - run:
+          name: Run Unit Tests
+          command: ./gradlew testDebugUnitTest
 
-      - store_artifacts:
-          path: app/build/reports
-          destination: reports
-          
-      - store_test_results:
-          path: app/build/test-results
 
 # add ktlin and detekt
