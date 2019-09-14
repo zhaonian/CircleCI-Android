@@ -55,6 +55,5 @@ jobs:
           command: ./gradlew test 
      
       - run:
-	  name: Run Instrumented Tests
-	  command: ./gradlew connectedAndroidTest
-
+	        name: Run Instrumented Tests
+	        command: ./gradlew connectedAndroidTest
